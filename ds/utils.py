@@ -1,4 +1,4 @@
-from typing import Any, Dict, Tuple
+from typing import Any, Dict, Tuple, Union
 
 import matplotlib.pyplot as plt
 import numpy as np
@@ -48,3 +48,25 @@ def encode_data(data: np.array) -> np.array:
         np.array([mapping[key] for key in data], dtype=np.int64).reshape(-1, 1),
         mapping,
     )
+
+
+def _sum_of_squares(a: np.array, b: Union[np.array, float]) -> float:
+    assert len(a.shape) == 1
+    assert len(b.shape) == 1 or isinstance(b, float)
+
+    return np.sqrt(sum((a - b) * (a - b)))
+
+
+def total_sum_of_squares(data: np.array) -> float:
+
+    return _sum_of_squares(data, data.mean())
+
+
+def residual_sum_of_squares(data: np.array, data_p: np.array) -> float:
+
+    return _sum_of_squares(data, data_p)
+
+
+def r_squared(data: np.array, data_p: np.array) -> float:
+
+    return 1 - residual_sum_of_squares(data, data_p) / total_sum_of_squares(data)

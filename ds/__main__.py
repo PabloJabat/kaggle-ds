@@ -6,7 +6,14 @@ import numpy as np
 import pandas as pd
 
 from ds.config import Config
-from ds.utils import encode_data, fit_model, get_age_bucket
+from ds.utils import (
+    encode_data,
+    fit_model,
+    get_age_bucket,
+    r_squared,
+    residual_sum_of_squares,
+    total_sum_of_squares,
+)
 
 if __name__ == "__main__":
 
@@ -48,7 +55,12 @@ if __name__ == "__main__":
 
     predictions = X.dot(beta)
 
-    zoom = [0, 3000]
-    plt.plot(predictions[zoom[0] : zoom[1]], label="predictions")
-    plt.plot(Y[zoom[0] : zoom[1]], label="values")
-    plt.show()
+    print(total_sum_of_squares(Y))
+    print(residual_sum_of_squares(Y, predictions))
+
+    print(r_squared(Y, predictions))
+
+    # zoom = [0, 3000]
+    # plt.plot(predictions[zoom[0] : zoom[1]], label="predictions")
+    # plt.plot(Y[zoom[0] : zoom[1]], label="values")
+    # plt.show()
