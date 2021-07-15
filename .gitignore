@@ -1,0 +1,14 @@
+# Data folders
+data
+
+# Development env
+.vscode
+.venv
+
+# Secrets
+.env
+kaggle.json
+
+# Compile
+.ipynb_checkpoints
+*.pyc
