@@ -1,5 +1,5 @@
 SHELL := /bin/bash
-.PHONY = requirements run test
+.PHONY = requirements install run check test
 
 requirements:
 	@echo Freezing environment ...
@@ -10,6 +10,12 @@ install:
 
 run:
 	@python -m ds
+
+check:
+	.venv/bin/pylint --disable=C0330,C0326 sdt
+	.venv/bin/black --check sdt tests
+	.venv/bin/isort --check sdt tests
+	.venv/bin/mypy ds tests
 
 test:
 	pytest tests
