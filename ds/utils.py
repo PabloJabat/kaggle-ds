@@ -14,7 +14,7 @@ def get_age_bucket(age: int) -> str:
     raise Exception
 
 
-def value_counts(array: np.array) -> Dict[Any, int]:
+def value_counts(array: np.ndarray) -> Dict[Any, int]:
     array_counts = {}
     for a_i in array:
         if a_i not in array_counts:
@@ -23,14 +23,14 @@ def value_counts(array: np.array) -> Dict[Any, int]:
     return array_counts
 
 
-def fit_model(x: np.array, y: np.array) -> Tuple[np.array, float]:
+def fit_model(x: np.ndarray, y: np.ndarray) -> Tuple[np.ndarray, float]:
     if len(x.shape) == 1:
         x = x.reshape(-1, 1)
 
     return nnls(x, y)
 
 
-def show_hist(data: np.array) -> None:
+def show_hist(data: np.ndarray) -> None:
     # data is unidimensional
     assert len(data.shape) == 1
 
@@ -38,7 +38,7 @@ def show_hist(data: np.array) -> None:
     plt.show()
 
 
-def encode_data(data: np.array) -> np.array:
+def encode_data(data: np.ndarray) -> np.ndarray:
 
     assert len(data.shape) == 1
 
@@ -50,23 +50,23 @@ def encode_data(data: np.array) -> np.array:
     )
 
 
-def _sum_of_squares(a: np.array, b: Union[np.array, float]) -> float:
+def _sum_of_squares(a: np.ndarray, b: Union[np.ndarray, float]) -> float:
     assert len(a.shape) == 1
     assert len(b.shape) == 1 or isinstance(b, float)
 
     return np.sqrt(sum((a - b) * (a - b)))
 
 
-def total_sum_of_squares(data: np.array) -> float:
+def total_sum_of_squares(data: np.ndarray) -> float:
 
     return _sum_of_squares(data, data.mean())
 
 
-def residual_sum_of_squares(data: np.array, data_p: np.array) -> float:
+def residual_sum_of_squares(data: np.ndarray, data_p: np.ndarray) -> float:
 
     return _sum_of_squares(data, data_p)
 
 
-def r_squared(data: np.array, data_p: np.array) -> float:
+def r_squared(data: np.ndarray, data_p: np.ndarray) -> float:
 
     return 1 - residual_sum_of_squares(data, data_p) / total_sum_of_squares(data)
