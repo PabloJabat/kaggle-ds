@@ -3,6 +3,7 @@ kaggle==1.5.12
 matplotlib==3.4.1
 mypy==0.812
 nb-black==1.0.7
+nptyping==1.4.2
 pandas==1.2.3
 pip-chill==1.0.1
 pydantic==1.8.2

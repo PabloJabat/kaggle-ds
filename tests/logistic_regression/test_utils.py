@@ -4,6 +4,7 @@ import pytest
 from ds.logistic_regression.utils import (
     logistic_cost_function,
     logistic_cost_gradient,
+    logistic_cost_hessian,
     sigmoid,
 )
 
@@ -11,9 +12,7 @@ from ds.logistic_regression.utils import (
 @pytest.mark.parametrize(
     "test_input, expected",
     [
-        (0, 0.5),
-        (np.inf, 1.0),
-        (-np.inf, 0.0),
+        (np.array([0, 0, 0]), np.array([0.5, 0.5, 0.5])),
         (np.array([0, np.inf, -np.inf]), np.array([0.5, 1.0, 0.0])),
     ],
 )
@@ -26,10 +25,13 @@ def test_sigmoid(test_input: float, expected: float):
         assert comparison
 
 
-def test_logistic_cost_regression_raises_assertion_errors():
+def test_logistic_cost_derivatives_raise_assertion_errors():
 
-    with pytest.raises(AssertionError):
+    with pytest.raises(ValueError):
         logistic_cost_gradient(np.array([1, 2]), np.array([2]), np.array([1]))
+
+    with pytest.raises(ValueError):
+        logistic_cost_hessian(np.array([1, 2]), np.array([2]), np.array([1]))
 
 
 def test_logistic_cost_function():

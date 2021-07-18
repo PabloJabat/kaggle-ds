@@ -1,7 +1,8 @@
-from typing import Any, Dict, Tuple, Union
+from typing import Any, Dict, Union
 
 import matplotlib.pyplot as plt
 import numpy as np
+from nptyping import NDArray, Number
 from scipy.optimize import nnls
 
 
@@ -23,14 +24,14 @@ def value_counts(array: np.ndarray) -> Dict[Any, int]:
     return array_counts
 
 
-def fit_model(x: np.ndarray, y: np.ndarray) -> Tuple[np.ndarray, float]:
+def fit_model(x: NDArray, y: NDArray) -> NDArray:
     if len(x.shape) == 1:
         x = x.reshape(-1, 1)
 
-    return nnls(x, y)
+    return np.array(nnls(x, y)[0])
 
 
-def show_hist(data: np.ndarray) -> None:
+def show_hist(data: NDArray) -> None:
     # data is unidimensional
     assert len(data.shape) == 1
 
@@ -38,7 +39,7 @@ def show_hist(data: np.ndarray) -> None:
     plt.show()
 
 
-def encode_data(data: np.ndarray) -> np.ndarray:
+def encode_data(data: NDArray) -> NDArray:
 
     assert len(data.shape) == 1
 
@@ -50,23 +51,23 @@ def encode_data(data: np.ndarray) -> np.ndarray:
     )
 
 
-def _sum_of_squares(a: np.ndarray, b: Union[np.ndarray, float]) -> float:
+def _sum_of_squares(a: NDArray, b: NDArray) -> Number:
     assert len(a.shape) == 1
     assert len(b.shape) == 1 or isinstance(b, float)
 
     return np.sqrt(sum((a - b) * (a - b)))
 
 
-def total_sum_of_squares(data: np.ndarray) -> float:
+def total_sum_of_squares(data: NDArray) -> Number:
 
     return _sum_of_squares(data, data.mean())
 
 
-def residual_sum_of_squares(data: np.ndarray, data_p: np.ndarray) -> float:
+def residual_sum_of_squares(data: NDArray, data_p: NDArray) -> Number:
 
     return _sum_of_squares(data, data_p)
 
 
-def r_squared(data: np.ndarray, data_p: np.ndarray) -> float:
+def r_squared(data: NDArray, data_p: NDArray) -> Number:
 
     return 1 - residual_sum_of_squares(data, data_p) / total_sum_of_squares(data)
