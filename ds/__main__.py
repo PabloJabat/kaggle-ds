@@ -29,8 +29,6 @@ if __name__ == "__main__":
 
     data_cleaned = data.dropna(subset=["Age", "Sex"]).copy()
 
-    logging.debug("Number of dropped rows %i", data.shape[0] - data_cleaned.shape[0])
-
     data_cleaned["Age_Buckets"] = data_cleaned["Age"].map(get_age_bucket)
 
     Y = data_cleaned["Fare"].values
