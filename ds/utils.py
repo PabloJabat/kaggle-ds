@@ -1,4 +1,7 @@
-from typing import Any, Dict, Union
+#!/usr/bin/env python3
+"""DS utils"""
+
+from typing import Any, Dict
 
 import matplotlib.pyplot as plt
 import numpy as np
@@ -7,6 +10,8 @@ from scipy.optimize import nnls
 
 
 def get_age_bucket(age: int) -> str:
+    """Return a string representing the age bucket"""
+
     step = 25
     for limit in range(0, 100 + step, step):
         if age < limit:
@@ -15,7 +20,9 @@ def get_age_bucket(age: int) -> str:
     raise Exception
 
 
-def value_counts(array: np.ndarray) -> Dict[Any, int]:
+def value_counts(array: NDArray) -> Dict[Any, int]:
+    """Count the number of equal elements in array"""
+
     array_counts = {}
     for a_i in array:
         if a_i not in array_counts:
@@ -25,6 +32,8 @@ def value_counts(array: np.ndarray) -> Dict[Any, int]:
 
 
 def fit_model(x: NDArray, y: NDArray) -> NDArray:
+    """Return the coefficients of a linear model"""
+
     if len(x.shape) == 1:
         x = x.reshape(-1, 1)
 
@@ -32,6 +41,8 @@ def fit_model(x: NDArray, y: NDArray) -> NDArray:
 
 
 def show_hist(data: NDArray) -> None:
+    """Show histogram of array"""
+
     # data is unidimensional
     assert len(data.shape) == 1
 
@@ -40,6 +51,7 @@ def show_hist(data: NDArray) -> None:
 
 
 def encode_data(data: NDArray) -> NDArray:
+    """Do one hot-encoding"""
 
     assert len(data.shape) == 1
 
@@ -59,15 +71,18 @@ def _sum_of_squares(a: NDArray, b: NDArray) -> Number:
 
 
 def total_sum_of_squares(data: NDArray) -> Number:
+    """Return the total sum of squares"""
 
     return _sum_of_squares(data, data.mean())
 
 
 def residual_sum_of_squares(data: NDArray, data_p: NDArray) -> Number:
+    """Return the residual sum of squares"""
 
     return _sum_of_squares(data, data_p)
 
 
 def r_squared(data: NDArray, data_p: NDArray) -> Number:
+    """Return the R Squared"""
 
     return 1 - residual_sum_of_squares(data, data_p) / total_sum_of_squares(data)

@@ -1,7 +1,9 @@
+#!/usr/bin/env python3
+"""Entry point"""
+
 import logging
 from pathlib import Path
 
-import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 
@@ -27,12 +29,9 @@ if __name__ == "__main__":
 
     data_cleaned = data.dropna(subset=["Age", "Sex"]).copy()
 
-    logging.debug(
-        f" Number of dropped rows: {data.shape[0] - data_cleaned.shape[0]} / {data.shape[0]}"
-    )
+    logging.debug("Number of dropped rows %i", data.shape[0] - data_cleaned.shape[0])
 
     data_cleaned["Age_Buckets"] = data_cleaned["Age"].map(get_age_bucket)
-    data_cleaned["Sex"]
 
     Y = data_cleaned["Fare"].values
     X_1 = data_cleaned["Age"].values
@@ -40,12 +39,6 @@ if __name__ == "__main__":
     X = np.column_stack([X_1, X_2])
 
     beta, residual = fit_model(X, Y)
-
-    # TODO:
-    # 1. Compute significance
-    # 2. Model with categorical variables (Is this the way to go about it?)
-    # 3. Fare seems to be related to Sex and Age
-    # 4. Is Fare related to Survival?
 
     print(beta)
 

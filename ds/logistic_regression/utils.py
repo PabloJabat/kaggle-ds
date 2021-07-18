@@ -1,3 +1,6 @@
+#!/usr/bin/env python3
+"""Logistic regression utils"""
+
 import numpy as np
 from nptyping import NDArray, Number
 
@@ -9,6 +12,7 @@ def sigmoid(x: NDArray) -> NDArray:
 
 
 def logistic_cost_function(x: NDArray, betha: NDArray, y: NDArray) -> Number:
+    """Return cost of the logistic function"""
 
     y_hat = sigmoid(x.dot(betha))
 
@@ -27,6 +31,7 @@ def logistic_cost_gradient(x: NDArray, betha: NDArray, y: NDArray) -> NDArray:
 
 
 def logistic_cost_hessian(x: NDArray, betha: NDArray, y: NDArray) -> NDArray:
+    """Return the hessian of the logistic regression cost function"""
 
     if not x.shape[0] == y.shape[0]:
         raise ValueError(f"Wrong shape: x -> {x.shape} - y -> {y.shape}")

@@ -1,8 +1,2 @@
-from typing import Callable
-
-import numpy as np
-
-
-def newton(func: Callable, x0: np.ndarray, fprime: Callable):
-
-    step = x0 / fprime(x0)
+#!/usr/bin/env python3
+"""Optimization algorithms"""

@@ -8,6 +8,7 @@ data
 # Secrets
 .env
 kaggle.json
+notes
 
 # Compile
 .ipynb_checkpoints
