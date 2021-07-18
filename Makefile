@@ -19,7 +19,7 @@ test: .venv/updated
 	.venv/bin/python -m pytest tests
 
 check: .venv/updated
-	.venv/bin/pylint --disable=C0330,C0326 sdt
-	.venv/bin/black --check sdt tests
-	.venv/bin/isort --check sdt tests
-	.venv/bin/mypy sdt tests
+	.venv/bin/pylint --disable=C0330,C0326 ds
+	.venv/bin/black --check ds tests
+	.venv/bin/isort --check ds tests
+	.venv/bin/mypy ds tests
